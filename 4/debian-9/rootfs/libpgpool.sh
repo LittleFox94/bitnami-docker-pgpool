@@ -271,7 +271,7 @@ pgpool_create_config() {
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-AUTHENTICATION-SETTINGS
     pgpool_set_property "enable_pool_hba" "off"
     pgpool_set_property "allow_clear_text_frontend_auth" "on"
-    pgpool_set_property "pool_passwd" ""
+    pgpool_set_property "pool_passwd" "''"
     pgpool_set_property "authentication_timeout" "'30'"
     # Connection Pooling settings
     # http://www.pgpool.net/docs/latest/en/html/runtime-config-connection-pooling.html
