@@ -196,7 +196,7 @@ pgpool_set_property() {
     local -r property="${1:?missing property}"
     local -r value="${2:-}"
     local -r conf_file="${3:-$PGPOOL_CONF_FILE}"
-    sed -i "s?^#*\s*${property}\s*=.*?${property} = '${value}'?g" "$conf_file"
+    sed -i "s?^#*\s*${property}\s*=.*?${property} = ${value}?g" "$conf_file"
 }
 
 ########################
@@ -262,42 +262,42 @@ pgpool_create_config() {
 
     # Connection settings
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-CONNECTION-SETTINGS
-    pgpool_set_property "listen_addresses" "*"
-    pgpool_set_property "port" "$PGPOOL_PORT_NUMBER"
-    pgpool_set_property "socket_dir" "$PGPOOL_TMP_DIR"
+    pgpool_set_property "listen_addresses" "'*'"
+    pgpool_set_property "port" "'$PGPOOL_PORT_NUMBER'"
+    pgpool_set_property "socket_dir" "'$PGPOOL_TMP_DIR'"
     # Communication Manager Connection settings
-    pgpool_set_property "pcp_socket_dir" "$PGPOOL_TMP_DIR"
+    pgpool_set_property "pcp_socket_dir" "'$PGPOOL_TMP_DIR'"
     # Authentication settings
     # ref: http://www.pgpool.net/docs/latest/en/html/runtime-config-connection.html#RUNTIME-CONFIG-AUTHENTICATION-SETTINGS
     pgpool_set_property "enable_pool_hba" "off"
     pgpool_set_property "allow_clear_text_frontend_auth" "on"
     pgpool_set_property "pool_passwd" ""
-    pgpool_set_property "authentication_timeout" "30"
+    pgpool_set_property "authentication_timeout" "'30'"
     # Connection Pooling settings
     # http://www.pgpool.net/docs/latest/en/html/runtime-config-connection-pooling.html
-    pgpool_set_property "max_pool" "15"
+    pgpool_set_property "max_pool" "'15'"
     # File Locations settings
-    pgpool_set_property "pid_file_name" "$PGPOOL_PID_FILE"
-    pgpool_set_property "logdir" "$PGPOOL_LOG_DIR"
+    pgpool_set_property "pid_file_name" "'$PGPOOL_PID_FILE'"
+    pgpool_set_property "logdir" "'$PGPOOL_LOG_DIR'"
     # Load Balancing settings
-    pgpool_set_property "load_balance_mode" "on"
-    pgpool_set_property "black_function_list" "nextval,setval"
+    pgpool_set_property "load_balance_mode" "'on'"
+    pgpool_set_property "black_function_list" "'nextval,setval'"
     # Streaming settings
-    pgpool_set_property "sr_check_user" "$PGPOOL_SR_CHECK_USER"
-    pgpool_set_property "sr_check_password" "$PGPOOL_SR_CHECK_PASSWORD"
-    pgpool_set_property "sr_check_period" "30"
+    pgpool_set_property "sr_check_user" "'$PGPOOL_SR_CHECK_USER'"
+    pgpool_set_property "sr_check_password" "'$PGPOOL_SR_CHECK_PASSWORD'"
+    pgpool_set_property "sr_check_period" "'30'"
     # Healthcheck per node settings
-    pgpool_set_property "health_check_period" "30"
-    pgpool_set_property "health_check_timeout" "10"
-    pgpool_set_property "health_check_user" "$PGPOOL_SR_CHECK_USER"
-    pgpool_set_property "health_check_password" "$PGPOOL_SR_CHECK_PASSWORD"
-    pgpool_set_property "health_check_max_retries" "5"
-    pgpool_set_property "health_check_retry_delay" "5"
+    pgpool_set_property "health_check_period" "'30'"
+    pgpool_set_property "health_check_timeout" "'10'"
+    pgpool_set_property "health_check_user" "'$PGPOOL_SR_CHECK_USER'"
+    pgpool_set_property "health_check_password" "'$PGPOOL_SR_CHECK_PASSWORD'"
+    pgpool_set_property "health_check_max_retries" "'5'"
+    pgpool_set_property "health_check_retry_delay" "'5'"
     # Failover settings
-    pgpool_set_property "failover_command" "echo \">>> Failover - that will initialize new primary node search!\""
-    pgpool_set_property "failover_on_backend_error" "off"
+    pgpool_set_property "failover_command" "'echo \">>> Failover - that will initialize new primary node search!\"'"
+    pgpool_set_property "failover_on_backend_error" "'off'"
     # Keeps searching for a primary node forever when a failover occurs
-    pgpool_set_property "search_primary_node_timeout" "0"
+    pgpool_set_property "search_primary_node_timeout" "'0'"
 
     # Backend settings
     read -r -a nodes <<< "$(tr ',;' ' ' <<< "${PGPOOL_BACKEND_NODES}")"
