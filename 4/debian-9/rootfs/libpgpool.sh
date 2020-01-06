@@ -174,7 +174,6 @@ pgpool_create_pghba() {
     cat > "$PGPOOL_PGHBA_FILE" << EOF
 local    all             all                            trust
 host     all             $PGPOOL_SR_CHECK_USER       all         trust
-host     all             $PGPOOL_POSTGRES_USERNAME       all         md5
 host     all             wide               all         trust
 host     all             pop_user           all         trust
 host     all             all                all         $authentication
