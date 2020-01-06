@@ -421,6 +421,7 @@ pgpool_initialize() {
             pgpool_ldap_config
         fi
         #pgpool_generate_password_file
+        echo '' > "PGPOOL_CONF_DIR/pool_passwd"
         pgpool_generate_admin_password_file
     fi
 }
