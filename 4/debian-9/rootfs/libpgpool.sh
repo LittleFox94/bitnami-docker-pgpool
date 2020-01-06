@@ -167,7 +167,7 @@ pgpool_start_nslcd_bg() {
 #   None
 #########################
 pgpool_create_pghba() {
-    local authentication="password"
+    local authentication="md5"
     info "Generating pg_hba.conf file..."
 
     is_boolean_yes "$PGPOOL_ENABLE_LDAP" && authentication="pam pamservice=pgpool.pam"
